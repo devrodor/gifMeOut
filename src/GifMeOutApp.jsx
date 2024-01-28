@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Grid from '@mui/material/Grid';
 import { Button } from "@mui/material";
+import { AddCategory } from "./components/AddCategory";
  
 export const GifMeOutApp = () => {
 
@@ -44,8 +45,10 @@ export const GifMeOutApp = () => {
                 {/* Titulo */}
                 <h1>GifMeOutApp</h1>
 
-                 {/* Input */}
-
+                {/* Input */}
+                {/* El nombre del metodo setCategories es random, simplemente para ordenar */}
+                <AddCategory setCategories={ setCategories } />
+    
                 {/* Listado de Gifs */}
                 <Button variant="contained" onClick={ addCategory }>Agregar</Button>
                 <ol>
