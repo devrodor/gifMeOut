@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Grid from '@mui/material/Grid';
-import { Button } from "@mui/material";
 import { AddCategory } from "./components/AddCategory";
  
 export const GifMeOutApp = () => {
@@ -29,9 +28,9 @@ export const GifMeOutApp = () => {
 
     */
 
-    const addCategory = ( ) => {
-        setCategories([...categories, 'The Smile']); // y para esto se usa el spread, metemos las categorías existentes y añadimos la nueva
-    }
+    // const addCategory = ( ) => {
+    //     setCategories([...categories, 'The Smile']); // y para esto se usa el spread, metemos las categorías existentes y añadimos la nueva
+    // }
 
     const [ categories, setCategories ] = useState([ 'Heavy Metal', 'Cats' ]);
 
@@ -49,8 +48,6 @@ export const GifMeOutApp = () => {
                 {/* El nombre del metodo setCategories es random, simplemente para ordenar */}
                 <AddCategory setCategories={ setCategories } />
     
-                {/* Listado de Gifs */}
-                <Button variant="contained" onClick={ addCategory }>Agregar</Button>
                 <ol>
                     { categories.map( category => {
                         return <li key={ category }>{ category }</li>

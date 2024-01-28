@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, TextField } from "@mui/material";
-
+import { Button } from "@mui/material";
 export const AddCategory = ({ setCategories }) => { //remember, aqui recibimos las props
 
         /* 
@@ -47,9 +47,7 @@ export const AddCategory = ({ setCategories }) => { //remember, aqui recibimos l
 
     return(
         <Box 
-        sx={{
-            '& .MuiTextField-root': { m: 1, width: '25ch' },
-        }}
+        sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
         noValidate
         autoComplete="off"
         >
@@ -64,6 +62,9 @@ export const AddCategory = ({ setCategories }) => { //remember, aqui recibimos l
                     //onChange={ (event) =>  onInputChange(event) } // cambiamos esto a ...
                     onChange={ onInputChange }
                 />
+                
+                {/* Listado de Gifs */}
+                <Button variant="contained" onClick={ onSubmit }>Agregar</Button>
             </div>
         </form>
         </Box>
