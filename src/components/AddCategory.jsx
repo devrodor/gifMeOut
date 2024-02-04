@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Box, TextField } from "@mui/material";
 import { Button } from "@mui/material";
-export const AddCategory = ({ setCategories }) => { //remember, aqui recibimos las props
+
+export const AddCategory = ({ onNewCategory }) => { //remember, aqui recibimos las props y las desestructuramos, una de ellas es la fn setCats
 
         /* 
 
@@ -37,10 +38,10 @@ export const AddCategory = ({ setCategories }) => { //remember, aqui recibimos l
     }
 
     const onSubmit = (event) => {
-        event.preventDefault(); 
-        if( inputValue.trim().length <= 1) return;//si no hay nada en el input, full stop
+        event.preventDefault();  
+        if( inputValue.trim().length <= 1 ) return;//si no hay nada en el input, full stop 
 
-        setCategories( categories => [ inputValue, ...categories]); //con esto evitamos sobreescribir el array original de categorias
+        onNewCategory( inputValue.trim() ); //emitimos el valor al padre a través del parámetro del hijo el hijoparametralpater :)
         setInputValue(''); //para limpiar el input una vez enviado
     }
 

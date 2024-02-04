@@ -1,10 +1,13 @@
 import { useState } from "react"
 import Grid from '@mui/material/Grid';
 import { AddCategory } from "./components/AddCategory";
+import { GifGrid } from "./components/GifGrid";
  
 export const GifMeOutApp = () => {
 
     /* 
+
+        REMEMBER: La desestructuración es contínua y muchas veces puede ser confuso saber qué se está extrayendo
 
         Vamos a establecer una variable de estado 'categories' en el componente. 
         Inicialmente, categories es undefined porque useState() se ha llamado sin un valor inicial. 
@@ -34,6 +37,25 @@ export const GifMeOutApp = () => {
 
     const [ categories, setCategories ] = useState([ 'Heavy Metal', 'Cats' ]);
 
+    const onAddCategory = ( newCategory ) => { //
+
+        //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+
+        /* 
+        
+        El método includes() determina si un array incluye un determinado elemento, devuelve true o false según corresponda.
+        
+        */
+
+        /* Podríamos validar estrictamente el valor con mayusculas o minusculas u otros caracteres, pero para React, 
+            son valores diferentes y por tanto admitidos en este caso. No complication
+        */
+
+        if( categories.includes( newCategory ) )return; //full stop, categoría ya existe.
+
+        setCategories([ newCategory, ...categories ]);
+    }
+
     return (
         <>
         <Grid container  
@@ -46,13 +68,23 @@ export const GifMeOutApp = () => {
 
                 {/* Input */}
                 {/* El nombre del metodo setCategories es random, simplemente para ordenar */}
-                <AddCategory setCategories={ setCategories } />
-    
-                <ol>
-                    { categories.map( category => {
-                        return <li key={ category }>{ category }</li>
-                    }) }
-                </ol>
+                {/* Cuando el componente está emitiendo algo, se usa el prefijo on por convención */}
+                <AddCategory 
+                    /* La prop onNewCategory es una función. 
+                    / Esta función es una envoltura alrededor de onAddCategory, que está definida en el componente padre. 
+                     Cada vez que onNewCategory es llamada en el hijo, llamará a onAddCategory en el padre con el mismo argumento que recibe. */
+                    onNewCategory={ ( cat ) => onAddCategory( cat )  } // la info llega desde el componente hijo y se emite y envia a fn.
+                /> 
+                
+                { 
+                    categories.map( ( category ) => (
+                        <GifGrid 
+                            key={ category } 
+                            category={ category } 
+                        />
+                    )) 
+                }
+        
 
             </Grid> 
         </Grid>
