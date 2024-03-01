@@ -1,15 +1,27 @@
 import { useState } from "react";
-import { Box, TextField } from "@mui/material";
-import { Button } from "@mui/material";
+import { TextField } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 
 export const AddCategory = ({ onNewCategory }) => { //remember, aqui recibimos las props y las desestructuramos, una de ellas es la fn setCats
 
+ 
     const [inputValue, setInputValue] = useState('');
+    const [timer, setTimer] = useState(null);
+
     //const onInputChange = (event) => {
     // desestructurando event.target 
-    const onInputChange = ({ target }) => { 
-        console.log(target.value);
+    const onInputChange = ({ target }) => {  
         setInputValue(target.value);
+        // Cancela el temporizador anterior
+        if (timer) {
+            clearTimeout(timer);
+        }
+        // Inicia un nuevo temporizador
+        setTimer(setTimeout(() => {
+            if(target.value.trim().length > 1) {
+                onNewCategory(target.value.trim());
+            }
+        }, 500)); // Ajusta el tiempo de espera según sea necesario
 
     }
 
@@ -23,29 +35,23 @@ export const AddCategory = ({ onNewCategory }) => { //remember, aqui recibimos l
 
 
     return(
-        <Box 
-        sx={
-            { '& .MuiTextField-root': { m: 0 }, 
-            display: 'flex' }
-        }
-        noValidate
-        autoComplete="off"
-        >
+ 
         <form onSubmit={ (event) => onSubmit(event) }>
-            <div>
-                <TextField 
-                    id="outlined-required"
-                    sx={{ flex: 1 }}
-                    label="Enter element list"
-                    value={ inputValue } 
-                    onChange={ onInputChange } //onChange={ (event) =>  onInputChange(event) } 
-                />
-                
-                {/* Listado de Gifs */}
-                <Button variant="contained" onClick={ onSubmit }>Agregar</Button>
-            </div>
+
+            <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                            <TextField 
+                                id="outlined-required"
+                                fullWidth 
+                                label="Escribe y observa la magia"
+                                value={ inputValue } 
+                                onChange={ onInputChange } //onChange={ (event) =>  onInputChange(event) } 
+                            />
+                    </Grid> 
+            </Grid>
+          
         </form>
-        </Box>
+       
 
     );
 }

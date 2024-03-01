@@ -29,10 +29,10 @@ const basicTheme = createTheme({
 export const GifMeOutApp = () => {
 
 
-    const [ categories, setCategories ] = useState([ 'Heavy Metal']);
+    const [ categories, setCategories ] = useState([ '']);
 
     const onAddCategory = ( newCategory ) => { //
-
+ 
         if( categories.includes( newCategory ) )return; //full stop, categoría ya existe.
         setCategories([ newCategory, ...categories ]);
     }
@@ -56,31 +56,31 @@ export const GifMeOutApp = () => {
         {/* Contenedor principal */}
         <Container maxWidth="lg" sx={{ mt: 2, mb: 2, p:1 }}>
 
-        <Grid container spacing={2}>
-        <Grid item xs={12}>
-            {/* Titulo */}
-            <h1>GifMeOutApp</h1>
-        </Grid>
-        <Grid item m={4} sx={{ mt: 0, mb: 0, p:0 }}>  
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        {/* Titulo */}
+                        <h1>GifMeOutApp</h1>
+                    </Grid>
+                    <Grid item xs={12} sx={{ m: 0, p:0 }}>  
+                        {/* Input + Functionality */} 
+                        <AddCategory 
+                            onNewCategory={ ( el ) => onAddCategory( el )  } 
+                        /> 
+                    </Grid>
+                </Grid>
+                <Grid item xs={12} sx={{ m: 0, p:0 }}>
+                        { 
+                            categories.map( ( cat ) => (
+                                <GifGrid 
+                                    key={ cat } 
+                                    category={ cat } 
+                                />
+                            )) 
+                        }
+                
 
-            {/* Input + Functionality */} 
-            <AddCategory 
-                onNewCategory={ ( el ) => onAddCategory( el )  } 
-            /> 
-            </Grid>
-                <Grid item m={8} sx={{ mt: 0, mb: 0, p:0 }}>
-                { 
-                    categories.map( ( cat ) => (
-                        <GifGrid 
-                            key={ cat } 
-                            category={ cat } 
-                        />
-                    )) 
-                }
-        
+                </Grid> 
 
-            </Grid> 
-        </Grid>
         </Container>
         </ThemeProvider>
         </>

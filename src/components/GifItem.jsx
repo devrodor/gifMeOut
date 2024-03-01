@@ -5,19 +5,18 @@ import Typography from '@mui/material/Typography';
 
 
 export const GifItem = ( { title, url } ) => {
-
-    console.log( title,url );
-
+ 
     return ( 
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ m: 1}}>
             <CardMedia
+            
             sx={{ height: 140 }}
             image={ url }
             title={ title }
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                { title }
+                <Typography gutterBottom variant="span" component="div">
+                { title } 
                 </Typography> 
             </CardContent> 
         </Card>
