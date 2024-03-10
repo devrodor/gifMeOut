@@ -1,21 +1,20 @@
-import { useEffect, useState } from 'react';
 import { GifItem } from './GifItem';
-import { getGifs } from '../helpers/getGifs';
+import { useFetchGifs } from '../hooks/useFetchGifs';
 import { Grid } from "@mui/material";
 
 
 export const GifGrid = ({ category }) => {
 
-    const[ images, setImages ] = useState([]); //remember, this is the initial state
-
-    useEffect( () => { 
-            getGifs( category )
-                .then( newImages => setImages( newImages ) ) 
-            },[] ); // callback + lista dependencias . Prevent reload of component
-  
+    //custom hook
+    const { images,isLoading } = useFetchGifs(category);
+ 
     return(
         <>
             <h3><strong>{ category }</strong></h3>
+            {
+                isLoading ? <h4>Cargando...</h4> : null
+            }
+             
             <Grid container>
                  
                             {

@@ -1,8 +1,8 @@
-import { useState } from "react"
-import { Container, Grid, AppBar, Toolbar, Box, Typography } from '@mui/material';
 import ReactLogo from './assets/images/react.svg';
-import { AddCategory } from "./components/AddCategory";
-import { GifGrid } from "./components/GifGrid";
+import { useState } from "react"
+import { AddCategory, GifGrid } from './components';
+import { Container, Grid, AppBar, Toolbar, Box, Typography } from '@mui/material';
+ 
 
 //Styles
 import '@fontsource/roboto/300.css';
